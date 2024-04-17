@@ -14,3 +14,6 @@ User next-child to nest a child component to a big componet with a same name (na
 
 # e09 layout
 Config layout in export default, just specify the name file layout in folder layouts
+
+# e10 error page 
+Just create an error file in layouts folder

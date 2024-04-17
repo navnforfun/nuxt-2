@@ -12,6 +12,9 @@
         <li>
           <nuxt-link to="user">User</nuxt-link>
         </li>
+        <li>
+          <nuxt-link to="settings">Settings</nuxt-link>
+        </li>
       </ul>
     </header>
   </div>

@@ -9,5 +9,8 @@ Use nuxt-link to redirect page
 
 # e07 validate params
 
-# 8 child component
+# e08 child component
 User next-child to nest a child component to a big componet with a same name (name file.vue and the child is in folder file)
+
+# e09 layout
+Config layout in export default, just specify the name file layout in folder layouts

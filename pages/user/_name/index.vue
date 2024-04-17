@@ -1,5 +1,10 @@
-<script setup>
-
+<script >
+export default {
+  validate({params}) {
+    // console.log(ctx)
+    return /^\w{3,6}$/.test(params.name)
+  }
+}
 </script>
 
 <template>

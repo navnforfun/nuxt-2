@@ -13,6 +13,7 @@ export default {
   <nuxt />
   <hr>
   <br>
+  
   <footer>Footer</footer>
 </div>
 </template>

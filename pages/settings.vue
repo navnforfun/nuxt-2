@@ -7,9 +7,11 @@
         </li>
         <li>
           <nuxt-link to="/settings/deck">Deck</nuxt-link>
+
         </li>
         <li>
           <nuxt-link to="/settings/schedule">Schedule</nuxt-link>
+
         </li>
       </ul>
       <hr>

@@ -17,3 +17,6 @@ Config layout in export default, just specify the name file layout in folder lay
 
 # e10 error page 
 Just create an error file in layouts folder
+
+# e11 12 13 14 global style, custom font
+change in nuxt.config.js

@@ -20,3 +20,5 @@ Just create an error file in layouts folder
 
 # e11 12 13 14 global style, custom font
 change in nuxt.config.js
+
+# e15-16 update design 

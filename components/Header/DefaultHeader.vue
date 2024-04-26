@@ -23,5 +23,7 @@
 </template>
 
 <style scoped>
-
+.nuxt-link-exact-active.nuxt-link-active{
+color: cadetblue;
+}
 </style>

@@ -27,6 +27,7 @@
           alt=""
         />
       </div>
+
       <div class="border-2">
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Shop.svg/1200px-Shop.svg.png"

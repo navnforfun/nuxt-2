@@ -8,6 +8,7 @@ export default {
 <div>
   <hear>Header </hear>
   <div>Banner</div>
+  .
   <hr>
   <br>
   <nuxt />

@@ -24,3 +24,7 @@ change in nuxt.config.js
 # e15-16 update design 
 
 # e19 20 - plugin, modal
+
+# e23 - asyncData()
+- The asyncData() use to put html to dom after a promise is done 
+- If use data() the html  will not in the dom what is not good for SEO

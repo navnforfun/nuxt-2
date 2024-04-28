@@ -1,12 +1,12 @@
 <script>
-import DeckList from "~/components/Decks/DeckList.vue";
+import DeckList from '~/components/Decks/DeckList.vue'
 
 export default {
   name: 'index',
-  components: {DeckList},
+  components: { DeckList },
   data() {
     return {
-      id: ""
+      id: ''
     }
   },
   methods: {
@@ -28,17 +28,17 @@ export default {
           <form action="">
             <div>
               <lable>Name:</lable>
-              <input type="text" placeholder="Name deck:"/>
+              <input type="text" placeholder="Name deck:" />
             </div>
             <br>
             <div>
               <lable>Description:</lable>
-              <textarea type="text" placeholder="Description deck:"/>
+              <textarea type="text" placeholder="Description deck:" />
             </div>
             <br>
             <div>
               <lable>Thumbnail:</lable>
-              <input type="file"/>
+              <input type="file" />
               <div class="preview"></div>
             </div>
           </form>
@@ -56,52 +56,81 @@ export default {
     <ul class="decks-list">
 
       <deck-list v-for="deck in decks" :key="deck._id" :name="deck.name" :description="deck.description"
-           :thumbnail="deck.thumbnail"/>
+                 :thumbnail="deck.thumbnail" />
 
     </ul>
 
   </div>
 </template>
 <script>
-import DeckList from "~/components/Decks/DeckList.vue";
+import DeckList from '~/components/Decks/DeckList.vue'
 
 export default {
-  data() {
-    return {
-      decks: [
-        {
-          _id: '1',
-          name: 'English',
-          description: 'English is world language',
-          thumbnail: 'https://images.shiksha.com/mediadata/ugcDocuments/images/wordpressImages/2019_09_english.jpg'
-        },
+  asyncData(ctx, cb) {
+    setTimeout(() => {
+      cb(null, {
+        decks: [
+          {
+            _id: '1',
+            name: 'English',
+            description: 'English is world language',
+            thumbnail: 'https://images.shiksha.com/mediadata/ugcDocuments/images/wordpressImages/2019_09_english.jpg'
+          },
 
-        {
-          _id: '2',
-          name: 'Chinese',
-          description: '1.4 billion people over the world use chinese language ',
-          thumbnail: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/640px-Flag_of_the_People%27s_Republic_of_China.svg.png'
-        },
+          {
+            _id: '2',
+            name: 'Chinese',
+            description: '1.4 billion people over the world use chinese language ',
+            thumbnail: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/640px-Flag_of_the_People%27s_Republic_of_China.svg.png'
+          },
 
-        {
-          _id: '3',
-          name: 'Japanese',
-          description: 'I love anime so much ',
-          thumbnail: 'https://upload.wikimedia.org/wikipedia/en/thumb/9/9e/Flag_of_Japan.svg/1200px-Flag_of_Japan.svg.png'
-        }
-      ]
-    }
+          {
+            _id: '3',
+            name: 'Japanese',
+            description: 'I love anime so much ',
+            thumbnail: 'https://upload.wikimedia.org/wikipedia/en/thumb/9/9e/Flag_of_Japan.svg/1200px-Flag_of_Japan.svg.png'
+          }
+        ]
+      })
+    }, 1500)
   },
   components: {
-    DeckList,
+    DeckList
   },
+
+  // created() {
+  //   setTimeout(() => {
+  //     this.decks = [
+  //       {
+  //         _id: '1',
+  //         name: 'English',
+  //         description: 'English is world language',
+  //         thumbnail: 'https://images.shiksha.com/mediadata/ugcDocuments/images/wordpressImages/2019_09_english.jpg'
+  //       },
+  //
+  //       {
+  //         _id: '2',
+  //         name: 'Chinese',
+  //         description: '1.4 billion people over the world use chinese language ',
+  //         thumbnail: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/640px-Flag_of_the_People%27s_Republic_of_China.svg.png'
+  //       },
+  //
+  //       {
+  //         _id: '3',
+  //         name: 'Japanese',
+  //         description: 'I love anime so much ',
+  //         thumbnail: 'https://upload.wikimedia.org/wikipedia/en/thumb/9/9e/Flag_of_Japan.svg/1200px-Flag_of_Japan.svg.png'
+  //       }
+  //     ]
+  //   }, 1500)
+  // },
   methods: {
     openModal() {
-      this.$modal.open({name: 'createDeckModal'})
+      this.$modal.open({ name: 'createDeckModal' })
     },
 
     closeModal() {
-      this.$modal.close({name: 'createDeckModal'});
+      this.$modal.close({ name: 'createDeckModal' })
     }
   }
 }

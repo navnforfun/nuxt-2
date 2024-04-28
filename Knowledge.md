@@ -22,3 +22,5 @@ Just create an error file in layouts folder
 change in nuxt.config.js
 
 # e15-16 update design 
+
+# e19 20 - plugin, modal

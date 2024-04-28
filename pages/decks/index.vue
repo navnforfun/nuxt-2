@@ -1,6 +1,9 @@
 <script>
+import DeckList from "~/components/Decks/DeckList.vue";
+
 export default {
   name: 'index',
+  components: {DeckList},
   data() {
     return {
       id: ""
@@ -18,63 +21,87 @@ export default {
   <div>
     <h3>Danh sach khoa hoc cc </h3>
     <button class="bg-amber-400" @click.prevent="openModal">Create a deck</button>
-    <v-modal name="test" class=" ">
-      <div class="flex justify-center align-center gap-4">
-        <h4 class="bg-sky-50"> Test modal</h4>
-        <h4  class="bg-sky-50" @click="closeModal">Close</h4>
-      </div>
+    <v-modal name="createDeckModal" class=" ">
+      <div class="bg-sky-50 p-20">
+        <div class=" justify-center align-center gap-4">
+          <h1>Create a new Deck</h1>
+          <form action="">
+            <div>
+              <lable>Name:</lable>
+              <input type="text" placeholder="Name deck:"/>
+            </div>
+            <br>
+            <div>
+              <lable>Description:</lable>
+              <textarea type="text" placeholder="Description deck:"/>
+            </div>
+            <br>
+            <div>
+              <lable>Thumbnail:</lable>
+              <input type="file"/>
+              <div class="preview"></div>
+            </div>
+          </form>
+          <br>
+          <div>
 
+            <button class="bg-sky-500" @click="  ">Create</button>
+
+            <button class="bg-red-600" @click="closeModal">Close</button>
+          </div>
+        </div>
+
+      </div>
     </v-modal>
     <ul class="decks-list">
 
-      <li>
+      <deck-list v-for="deck in decks" :key="deck._id" :name="deck.name" :description="deck.description"
+           :thumbnail="deck.thumbnail"/>
 
-        <nuxt-link to="/decks/1">
-          <div class="border-2 my-5 hover:underline ">
-            <h3 class="font-bold ">C#</h3>
-            <p class="italic">Sieu ngon bo re </p>
-            <img width="140"
-                 src="https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/samsung/Samsung-Galaxy-S24-Plus/Cobalt-Violet/Samsung-Galaxy-S24-Plus-Cobalt-Violet-thumbnail.png"
-                 alt="dien thoai">
-          </div>
-        </nuxt-link>
-      </li>
-      <li>
-        <nuxt-link to="/decks/2">
-          <div class="border-2 my-5 hover:underline ">
-            <h3 class="font-bold">C#</h3>
-            <p class="italic">Sieu ngon bo re </p>
-            <img width="140"
-                 src="https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/samsung/Samsung-Galaxy-S24-Plus/Cobalt-Violet/Samsung-Galaxy-S24-Plus-Cobalt-Violet-thumbnail.png"
-                 alt="dien thoai">
-          </div>
-        </nuxt-link>
-      </li>
-      <li>
-
-        <nuxt-link to="/decks/3">
-          <div class="border-2 my-5 hover:underline ">
-            <h3 class="font-bold">C#</h3>
-            <p class="italic">Sieu ngon bo re </p>
-            <img width="140"
-                 src="https://cdn.tmobile.com/content/dam/t-mobile/en-p/cell-phones/samsung/Samsung-Galaxy-S24-Plus/Cobalt-Violet/Samsung-Galaxy-S24-Plus-Cobalt-Violet-thumbnail.png"
-                 alt="dien thoai">
-          </div>
-        </nuxt-link>
-      </li>
     </ul>
 
   </div>
 </template>
 <script>
+import DeckList from "~/components/Decks/DeckList.vue";
+
 export default {
+  data() {
+    return {
+      decks: [
+        {
+          _id: '1',
+          name: 'English',
+          description: 'English is world language',
+          thumbnail: 'https://images.shiksha.com/mediadata/ugcDocuments/images/wordpressImages/2019_09_english.jpg'
+        },
+
+        {
+          _id: '2',
+          name: 'Chinese',
+          description: '1.4 billion people over the world use chinese language ',
+          thumbnail: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/640px-Flag_of_the_People%27s_Republic_of_China.svg.png'
+        },
+
+        {
+          _id: '3',
+          name: 'Japanese',
+          description: 'I love anime so much ',
+          thumbnail: 'https://upload.wikimedia.org/wikipedia/en/thumb/9/9e/Flag_of_Japan.svg/1200px-Flag_of_Japan.svg.png'
+        }
+      ]
+    }
+  },
+  components: {
+    DeckList,
+  },
   methods: {
     openModal() {
-      this.$modal.open({name: 'test'})
+      this.$modal.open({name: 'createDeckModal'})
     },
 
-    closeModal(){
-      this.$modal.close({name: 'test'});
+    closeModal() {
+      this.$modal.close({name: 'createDeckModal'});
     }
   }
 }

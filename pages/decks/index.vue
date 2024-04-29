@@ -105,6 +105,10 @@ export default {
       ctx.error(e)
     })
   },
+  created() {
+    this.$store.dispatch('setDecks',this.decks )
+    console.log(this.$store.getters.decks)
+  },
   components: {
     DeckList
   },

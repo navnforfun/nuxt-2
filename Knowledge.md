@@ -31,3 +31,4 @@ change in nuxt.config.js
 - It run on server 
 - Context in asyncData is useful, can rea router..
 - Use promise
+# e27 vuex

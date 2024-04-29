@@ -14,14 +14,14 @@
       <div>
         <ul>
           <li></li>
-        </ul >
+        </ul>
       </div>
     </div>
-    <br/>
-    <hr/>
-    <br/>
+    <br />
+    <hr />
+    <br />
     <div class="grid grid-cols-6 gap-4 mx-10">
-<card-list v-for="card in cards" :key="card._id" :keyword="card.keyword" :picture="card.picture" />
+      <card-list v-for="card in cards" :key="card._id" :keyword="card.keyword" :picture="card.picture" />
 
     </div>
     <v-modal name="createCardModal" class=" ">
@@ -31,17 +31,17 @@
           <form action="">
             <div>
               <lable>Name:</lable>
-              <input type="text" placeholder="Name card:"/>
+              <input type="text" placeholder="Name card:" />
             </div>
             <br>
             <div>
               <lable>Description:</lable>
-              <textarea type="text" placeholder="Description deck:"/>
+              <textarea type="text" placeholder="Description deck:" />
             </div>
             <br>
             <div>
               <lable>Thumbnail:</lable>
-              <input type="file"/>
+              <input type="file" />
               <div class="preview"></div>
             </div>
           </form>
@@ -59,15 +59,35 @@
   </section>
 </template>
 <script>
-import CardList from "~/components/Cards/CardList.vue";
+import CardList from '~/components/Cards/CardList.vue'
+
 export default {
-  validate({params}) {
+  validate({ params }) {
     // console.log(ctx)
     // return /^\w{3,6}$/.test(params.id);
-    return true;
+    return true
   },
   components: {
     CardList
+  },
+  asyncData(ctx) {
+    console.log(ctx.params.id)
+    // console.log(ctx)
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({
+          deck: {
+            _id: '1',
+            name: 'English',
+            description: 'English is world language',
+            thumbnail: 'https://images.shiksha.com/mediadata/ugcDocuments/images/wordpressImages/2019_09_english.jpg'
+          }
+        })
+
+      }, 1500)
+    }).catch( (e) =>{
+      console.log(e)
+    })
   },
   data() {
     return {
@@ -96,19 +116,19 @@ export default {
           _id: 2,
           picture: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Shop.svg/1200px-Shop.svg.png',
           keyword: 'Shop'
-        },
+        }
       ]
     }
   },
   methods: {
     openModal() {
-      this.$modal.open({name: 'createCardModal'})
+      this.$modal.open({ name: 'createCardModal' })
     },
 
     closeModal() {
-      this.$modal.close({name: 'createCardModal'});
+      this.$modal.close({ name: 'createCardModal' })
     }
   }
-};
+}
 </script>
 <style scoped></style>

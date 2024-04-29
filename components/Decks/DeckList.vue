@@ -2,8 +2,8 @@
 
 <template>
   <li>
-hi
-    <nuxt-link to="/decks/1">
+
+    <nuxt-link :to="`/decks/${id}`">
       <div class="border-2 my-5 hover:underline ">
         <h3 class="font-bold ">{{name}}</h3>
         <p class="italic">{{description}} </p>
@@ -25,7 +25,8 @@ export default {
     },
     thumbnail:{
       type:String,
-    }
+    },
+    id:String
 
 
   }

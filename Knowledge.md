@@ -37,3 +37,5 @@ change in nuxt.config.js
 - nuxtServerInit: this function run when server is start. It uses to set data to vueStore and only use in action of store/index.js
 # e29-30 use fire base + create deck
 # e31 + 32 get a deck and get list deck
+# e33 update a deck
+Logic: Use modal in default - default has DeckForm - DeckForm emit onSubmit to Default 

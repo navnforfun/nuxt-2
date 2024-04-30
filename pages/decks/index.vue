@@ -1,17 +1,8 @@
 <template>
   <div>
     <h3>Danh sach khoa hoc cc </h3>
-    <button class="bg-amber-400" @click.prevent="openModal">Create a deck</button>
-    <v-modal name="createDeckModal" class=" ">
-      <div class="bg-sky-50 p-20">
-        <div class=" justify-center align-center gap-4">
-          <h1>Create a new Deck</h1>
-        <deck-form @submitForm="onSubmit" />
+    <button class="bg-amber-400" @click.prevent="openModal('DeckFormModal')">Create a deck</button>
 
-        </div>
-
-      </div>
-    </v-modal>
     <ul class="decks-list">
       <deck-list v-for="deck in decks"
                  :key="deck.id"
@@ -29,6 +20,7 @@ import DeckList from '~/components/Decks/DeckList.vue'
 import DeckForm from '~/components/Decks/DeckForm.vue'
 import error from '~/layouts/error.vue'
 import axios from 'axios'
+
 export default {
   data() {
     return {
@@ -74,15 +66,19 @@ export default {
   //   }, 1500)
   // },
   methods: {
-    openModal() {
-      this.$modal.open({ name: 'createDeckModal' })
+    openModal(name) {
+      if (name === 'DeckFormModal') {
+
+        this.$modal.open({ name: 'DeckFormModal' })
+
+      }
     },
-    onSubmit(deckData){
+    onSubmit(deckData) {
       // console.log(deckData)
-      axios.post('https://nuxt2-start-default-rtdb.asia-southeast1.firebasedatabase.app/decks.json',deckData)
-      .then(response => {
-        console.log(response)
-      }).catch(e =>{
+      axios.post('https://nuxt2-start-default-rtdb.asia-southeast1.firebasedatabase.app/decks.json', deckData)
+        .then(response => {
+          console.log(response)
+        }).catch(e => {
         console.log(e)
       })
     }

@@ -21,7 +21,7 @@ export default {
       this.$emit('submitForm', this.editedDeck)
     },
     closeModal() {
-      this.$modal.close({ name: 'createDeckModal' })
+      this.$modal.close({ name: 'DeckFormModal' })
     }
   }
 }
@@ -49,7 +49,9 @@ export default {
     <br>
     <div>
 
-      <button class="bg-sky-500" @click="onSave">Create</button>
+      <button class="bg-sky-500" @click="onSave">
+        {{editedDeck.id? "Edit":"Create"}}
+      </button>
       <button class="bg-red-600" @click="closeModal">Close</button>
     </div>
   </div>

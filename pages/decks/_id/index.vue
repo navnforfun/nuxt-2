@@ -5,10 +5,12 @@
         <h3 class="font-bold text-3xl">
           Learn something new by Ngoc Anh
         </h3>
-        <h1 class="font-bold">{{decks.name}}</h1>
+        <h1 class="font-bold">{{ decks.name }}</h1>
         <div class="flex justify-center">
           <button class="bg-green-300">Start now</button>
-          <button class="bg-blue-300" @click="openModal">Create a card</button>
+          <button class="bg-blue-300 mx-16" @click="openModal('createCardModal')">Create a card</button>
+          <button class="bg-yellow-400" @click="openModal('DeckFormModal')">Edit a deck</button>
+
         </div>
       </div>
 
@@ -63,10 +65,9 @@
 import CardList from '~/components/Cards/CardList.vue'
 import axios from 'axios'
 import decks from '../index.vue'
-export default {
-  computed: {
 
-  },
+export default {
+  computed: {},
   validate({ params }) {
     // console.log(ctx)
     // return /^\w{3,6}$/.test(params.id);
@@ -78,11 +79,11 @@ export default {
   asyncData(ctx) {
     return axios.get(
       `https://nuxt2-start-default-rtdb.asia-southeast1.firebasedatabase.app/decks/${ctx.params.id}.json`
-    ).then(res =>{
+    ).then(res => {
       return {
-        decks: res.data,
+        decks: res.data
       }
-    }).catch( (e) =>{
+    }).catch((e) => {
       console.log(e)
     })
   },
@@ -118,8 +119,14 @@ export default {
     }
   },
   methods: {
-    openModal() {
-      this.$modal.open({ name: 'createCardModal' })
+    openModal(name) {
+      if (name === 'createCardModal') {
+        this.$modal.open({ name: 'createCardModal' })
+
+      } else if (name === 'DeckFormModal') {
+        this.$modal.open({ name: 'DeckFormModal' ,payload:{...this.decks,id:this.$route.params.id}})
+
+      }
     },
 
     closeModal() {

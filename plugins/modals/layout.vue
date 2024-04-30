@@ -47,6 +47,7 @@ export default {
   methods: {
     open(params) {
       this.visible = true
+      this.payload = params.payload
     },
     close(params) {
       this.visible = false

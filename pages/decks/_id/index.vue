@@ -3,8 +3,9 @@
     <div class="flex justify-center">
       <div class="">
         <h3 class="font-bold text-3xl">
-          Learn new language #{{ $route.params.id }} by Ngoc Anh
+          Learn something new by Ngoc Anh
         </h3>
+        <h1 class="font-bold">{{decks.name}}</h1>
         <div class="flex justify-center">
           <button class="bg-green-300">Start now</button>
           <button class="bg-blue-300" @click="openModal">Create a card</button>
@@ -60,8 +61,12 @@
 </template>
 <script>
 import CardList from '~/components/Cards/CardList.vue'
-
+import axios from 'axios'
+import decks from '../index.vue'
 export default {
+  computed: {
+
+  },
   validate({ params }) {
     // console.log(ctx)
     // return /^\w{3,6}$/.test(params.id);
@@ -71,20 +76,12 @@ export default {
     CardList
   },
   asyncData(ctx) {
-    console.log(ctx.params.id)
-    // console.log(ctx)
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve({
-          deck: {
-            _id: '1',
-            name: 'English',
-            description: 'English is world language',
-            thumbnail: 'https://images.shiksha.com/mediadata/ugcDocuments/images/wordpressImages/2019_09_english.jpg'
-          }
-        })
-
-      }, 1500)
+    return axios.get(
+      `https://nuxt2-start-default-rtdb.asia-southeast1.firebasedatabase.app/decks/${ctx.params.id}.json`
+    ).then(res =>{
+      return {
+        decks: res.data,
+      }
     }).catch( (e) =>{
       console.log(e)
     })

@@ -14,8 +14,8 @@
     </v-modal>
     <ul class="decks-list">
       <deck-list v-for="deck in decks"
-                 :key="deck._id"
-                 :id="deck._id"
+                 :key="deck.id"
+                 :id="deck.id"
                  :name="deck.name"
                  :description="deck.description"
                  :thumbnail="deck.thumbnail"
@@ -35,6 +35,7 @@ export default {
       id: ''
     }
   },
+
   computed: {
     decks() {
       // console.log(this.$store.state.decks)

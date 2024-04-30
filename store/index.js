@@ -1,6 +1,7 @@
 import Vuex from 'vuex'
 import decks from '~/pages/decks/index.vue'
 import axios from 'axios'
+
 const createStore = () => {
   return new Vuex.Store({
     state: {
@@ -14,35 +15,18 @@ const createStore = () => {
     actions: {
 
       nuxtServerInit(vuexCtx, ctx) {
-        return new Promise((resolve, reject) => {
-          // reject(new Error())
-
-          resolve()
-        }).then(data =>{
-          console.log("Server initialized")
-          vuexCtx.commit('setDecks', [
-            {
-              _id: '1',
-              name: 'English',
-              description: 'English is world language',
-              thumbnail: 'https://images.shiksha.com/mediadata/ugcDocuments/images/wordpressImages/2019_09_english.jpg'
-            },
-
-            {
-              _id: '2',
-              name: 'Chinese',
-              description: '1.4 billion people over the world use chinese language ',
-              thumbnail: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/640px-Flag_of_the_People%27s_Republic_of_China.svg.png'
-            },
-
-            {
-              _id: '3',
-              name: 'Japanese',
-              description: 'I love anime so much ',
-              thumbnail: 'https://upload.wikimedia.org/wikipedia/en/thumb/9/9e/Flag_of_Japan.svg/1200px-Flag_of_Japan.svg.png'
-            }
-          ])
-        })
+        return axios.get('https://nuxt2-start-default-rtdb.asia-southeast1.firebasedatabase.app/decks.json')
+          .then((response) => {
+          let decksArr = []
+            // console.log(response.data)
+          for (let key in response.data) {
+            decksArr.push({ ...response.data[key], id: key })
+          }
+          // console.log(decksArr)
+          vuexCtx.commit('setDecks', decksArr)
+        }).catch(e =>{
+          console.log(e)
+          })
       },
       setDecks(vuexContext, decks) {
         vuexContext.commit('setDecks', decks)

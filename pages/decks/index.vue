@@ -1,22 +1,3 @@
-<script>
-import DeckList from '~/components/Decks/DeckList.vue'
-
-export default {
-  name: 'index',
-  components: { DeckList },
-  data() {
-    return {
-      id: ''
-    }
-  },
-  methods: {
-    hiUser() {
-      this.$router.push(`/decks/${this.id}`)
-    }
-  }
-}
-</script>
-
 <template>
   <div>
     <h3>Danh sach khoa hoc cc </h3>
@@ -25,30 +6,8 @@ export default {
       <div class="bg-sky-50 p-20">
         <div class=" justify-center align-center gap-4">
           <h1>Create a new Deck</h1>
-          <form action="">
-            <div>
-              <lable>Name:</lable>
-              <input type="text" placeholder="Name deck:" />
-            </div>
-            <br>
-            <div>
-              <lable>Description:</lable>
-              <textarea type="text" placeholder="Description deck:" />
-            </div>
-            <br>
-            <div>
-              <lable>Thumbnail:</lable>
-              <input type="file" />
-              <div class="preview"></div>
-            </div>
-          </form>
-          <br>
-          <div>
+        <deck-form @submitForm="onSubmit" />
 
-            <button class="bg-sky-500" @click="  ">Create</button>
-
-            <button class="bg-red-600" @click="closeModal">Close</button>
-          </div>
         </div>
 
       </div>
@@ -67,19 +26,24 @@ export default {
 </template>
 <script>
 import DeckList from '~/components/Decks/DeckList.vue'
+import DeckForm from '~/components/Decks/DeckForm.vue'
 import error from '~/layouts/error.vue'
-
+import axios from 'axios'
 export default {
-
+  data() {
+    return {
+      id: ''
+    }
+  },
   computed: {
     decks() {
-
-      console.log(this.$store.state.decks)
+      // console.log(this.$store.state.decks)
       return this.$store.state.decks
     }
   },
   components: {
-    DeckList
+    DeckList,
+    DeckForm
   },
 
   // created() {
@@ -112,10 +76,17 @@ export default {
     openModal() {
       this.$modal.open({ name: 'createDeckModal' })
     },
-
-    closeModal() {
-      this.$modal.close({ name: 'createDeckModal' })
+    onSubmit(deckData){
+      // console.log(deckData)
+      axios.post('https://nuxt2-start-default-rtdb.asia-southeast1.firebasedatabase.app/decks.json',deckData)
+      .then(response => {
+        console.log(response)
+      }).catch(e =>{
+        console.log(e)
+      })
     }
+
+
   }
 }
 </script>

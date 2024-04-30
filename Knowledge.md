@@ -35,3 +35,4 @@ change in nuxt.config.js
 # e28 fetch + nuxtServerInit
 - fetch use like asyncData() but it is not set data to this page. You must use store in Vuex coop vs computed to set data
 - nuxtServerInit: this function run when server is start. It uses to set data to vueStore and only use in action of store/index.js
+# e29-30 use fire base + create deck

@@ -1,6 +1,6 @@
 import Vuex from 'vuex'
 import decks from '~/pages/decks/index.vue'
-
+import axios from 'axios'
 const createStore = () => {
   return new Vuex.Store({
     state: {
@@ -16,9 +16,6 @@ const createStore = () => {
       nuxtServerInit(vuexCtx, ctx) {
         return new Promise((resolve, reject) => {
           // reject(new Error())
-          setTimeout(() => {
-
-          }, 1500)
 
           resolve()
         }).then(data =>{
@@ -45,7 +42,6 @@ const createStore = () => {
               thumbnail: 'https://upload.wikimedia.org/wikipedia/en/thumb/9/9e/Flag_of_Japan.svg/1200px-Flag_of_Japan.svg.png'
             }
           ])
-          vuexCtx.commit('setDecks')
         })
       },
       setDecks(vuexContext, decks) {

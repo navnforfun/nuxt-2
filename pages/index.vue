@@ -1,5 +1,6 @@
 <template>
   <div id="root">
+    <event-alert note="Home" />
     <div class="flex justify-center">
       <div
         class="w-11/12 h-52 bg-center bg-cover  bg-[url('~assets/img/banner.jpg')]"

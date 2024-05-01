@@ -47,4 +47,5 @@ You should call API in action, and interact with html in page
 - Config title of a page by head:{}
 - Config loading
 # e37 env
+# e38 plugin basic
 

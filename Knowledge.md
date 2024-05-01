@@ -51,3 +51,4 @@ You should call API in action, and interact with html in page
 # e39 use nuxt module
 # e40 middleware
 # e41 42 login register with firebase 
+# e43 fix login to Vuex

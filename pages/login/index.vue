@@ -7,21 +7,26 @@ export default {
   data() {
     return {
       email: '',
-      pass: ''
+      pass: '',
+      isLogin: true,
 
     }
   },
   methods: {
     onSubmit() {
-      this.$axios.post(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.fbApiKey}`, {
+      this.$store.dispatch('authenticate',{
         email: this.email,
-        password: this.pass,
-        returnSecureToken: true
-      }).then(data => {
+        pass: this.pass,
+        isLogin: this.isLogin
+      }).then(data =>{
         console.log(data)
-      }).catch(e => {
+        if(data.success){
+          this.$router.push('/decks')
+        }
+      }).catch(e =>{
         console.log(e)
       })
+
     }
   }
 }

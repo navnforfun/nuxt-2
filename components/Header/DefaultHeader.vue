@@ -18,6 +18,9 @@
       <li>
         <nuxt-link to="settings">Settings</nuxt-link>
       </li>
+      <li>
+        <nuxt-link to="login">Login</nuxt-link>
+      </li>
     </ul>
   </div>
 </template>

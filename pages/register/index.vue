@@ -8,20 +8,22 @@ export default {
     return {
       email: '',
       pass: '',
-      repass: ''
+      repass: '',
+      isLogin: false
     }
   },
   methods: {
     onSubmit() {
       if (this.pass === this.repass) {
-        this.$axios.$post(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.fbApiKey}`, {
+        this.$store.dispatch('authenticate', {
           email: this.email,
-          password: this.pass,
-          returnSecureToken: true
-        }).then(data =>{
+          pass: this.pass,
+          isLogin: this.isLogin
+        }).then(data => {
           console.log(data)
-        }).catch(e =>{
-          console.log(e)
+          if (data.success) {
+            this.$router.push('/login')
+          }
         })
 
       } else {

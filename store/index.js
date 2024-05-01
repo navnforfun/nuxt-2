@@ -5,7 +5,8 @@ import res from 'core-js/internals/is-forced.js'
 const createStore = () => {
   return new Vuex.Store({
     state: {
-      decks: []
+      decks: [],
+      token: null
     },
     mutations: {
       addDeck(state, deck) {
@@ -17,12 +18,14 @@ const createStore = () => {
       },
       setDecks(state, decks) {
         state.decks = decks
+      },
+      setToken(state, token) {
+        state.token = token
       }
     },
     actions: {
-
       nuxtServerInit(vuexCtx, ctx) {
-        return ctx.app.$axios.$get(process.env.baseApiUrl+'decks.json')
+        return ctx.app.$axios.$get(process.env.baseApiUrl + 'decks.json')
           .then((data) => {
             let decksArr = []
             // console.log(response.data)
@@ -36,7 +39,7 @@ const createStore = () => {
           })
       },
       addDeck(vuexCtx, deckData) {
-        return this.$axios.$post(process.env.baseApiUrl+'decks.json', deckData)
+        return this.$axios.$post(process.env.baseApiUrl + 'decks.json', deckData)
           .then(data => {
             vuexCtx.commit('addDeck', { ...deckData, id: data.name })
           }).catch(e => {
@@ -44,15 +47,35 @@ const createStore = () => {
           })
       },
       editDeck(vuexCtx, deckData) {
-        return  this.$axios.$put(process.env.baseApiUrl+`decks/${deckData.id}.json`, deckData)
+        return this.$axios.$put(process.env.baseApiUrl + `decks/${deckData.id}.json`, deckData)
           .then(data => {
-           vuexCtx.commit('editDeck',{ ...data, id:deckData.id })
+            vuexCtx.commit('editDeck', { ...data, id: deckData.id })
           }).catch(e => {
             console.log(e)
           })
       },
       setDecks(vuexContext, decks) {
         vuexContext.commit('setDecks', decks)
+      },
+      authenticate(vuexCtx, credentials) {
+        return new Promise((resolve, reject) => {
+          let authUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.fbApiKey}`
+          if (!credentials.isLogin) {
+            authUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.fbApiKey}`
+          }
+          console.log(credentials)
+          this.$axios.$post(authUrl, {
+            email: credentials.email,
+            password: credentials.pass,
+            returnSecureToken: true
+          }).then(data => {
+            console.log(data)
+            vuexCtx.commit('setToken', data.idToken)
+            resolve({ success: true })
+          }).catch(e => {
+            reject(e.response)
+          })
+        })
       }
     },
     getters: {

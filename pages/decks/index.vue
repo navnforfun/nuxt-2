@@ -22,11 +22,15 @@ import error from '~/layouts/error.vue'
 import axios from 'axios'
 
 export default {
+  head:{
+    title: 'Decks - Learn'
+  },
   data() {
     return {
       id: ''
     }
   },
+  layout: 'default',
 
   computed: {
     decks() {

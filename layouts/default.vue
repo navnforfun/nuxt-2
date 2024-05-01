@@ -9,21 +9,24 @@ export default {
   components: { DeckForm, DefaultHeader, DefaultFooter },
   methods: {
     onSubmit(deckData) {
-      // console.log(deckData)
+      console.log(deckData)
       if (!deckData.id) {
-        axios.post('https://nuxt2-start-default-rtdb.asia-southeast1.firebasedatabase.app/decks.json', deckData)
-          .then(response => {
-            console.log(response)
-          }).catch(e => {
-          console.log(e)
-        })
+        this.$store.dispatch('addDeck', deckData)
+          .then(() => {
+            console.log('close')
+            this.$modal.close({ name: 'DeckFormModal' })
+          })
       } else {
-        axios.put(`https://nuxt2-start-default-rtdb.asia-southeast1.firebasedatabase.app/decks/${deckData.id}.json`, deckData)
-          .then(response => {
-            console.log(response)
-          }).catch(e => {
-          console.log(e)
-        })
+
+        this.$store.dispatch('editDeck', deckData)
+          .then(() => {
+            console.log('close')
+
+            this.$modal.close({ name: 'DeckFormModal' })
+            this.$router.push('/decks')
+            // this.$router.push('/')
+
+          })
       }
     }
 

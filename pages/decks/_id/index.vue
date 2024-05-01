@@ -67,12 +67,19 @@ import axios from 'axios'
 import decks from '../index.vue'
 
 export default {
+  head(){
+    return{
+      title: `Deck: ${this.decks.name}`
+    }
+  },
   computed: {},
   validate({ params }) {
     // console.log(ctx)
     // return /^\w{3,6}$/.test(params.id);
     return true
   },
+  layout: "default",
+
   components: {
     CardList
   },

@@ -39,3 +39,9 @@ change in nuxt.config.js
 # e31 + 32 get a deck and get list deck
 # e33 update a deck
 Logic: Use modal in default - default has DeckForm - DeckForm emit onSubmit to Default 
+# e34 Update logic 
+Action in vuex can run async but mutation is not.
+You should call API in action, and interact with html in page
+
+# e35 header
+- Config title of a page by head:{}

@@ -10,10 +10,11 @@
       <div class="flex justify-between gap-5">
         <div class="border-2 w-full">Deck 1</div>
         <div class=" border-2 w-full">Deck 1</div>
-        
+
         <div class="border-2 w-full">Deck 1</div>
       </div>
     </div>
+    <button @click="toDecks" >Test roue</button>
   </div>
 </template>
 
@@ -21,5 +22,11 @@
 export default {
   name: "IndexPage",
   layout: "default",
+  methods:{
+    toDecks(){
+      this.$router.push('/decks')
+
+    }
+  }
 };
 </script>

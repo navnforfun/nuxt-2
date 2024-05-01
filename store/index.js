@@ -1,6 +1,5 @@
 import Vuex from 'vuex'
 import decks from '~/pages/decks/index.vue'
-import axios from 'axios'
 import res from 'core-js/internals/is-forced.js'
 
 const createStore = () => {
@@ -23,12 +22,12 @@ const createStore = () => {
     actions: {
 
       nuxtServerInit(vuexCtx, ctx) {
-        return axios.get(process.env.baseApiUrl+'decks.json')
-          .then((response) => {
+        return ctx.app.$axios.$get(process.env.baseApiUrl+'decks.json')
+          .then((data) => {
             let decksArr = []
             // console.log(response.data)
-            for (let key in response.data) {
-              decksArr.push({ ...response.data[key], id: key })
+            for (let key in data) {
+              decksArr.push({ ...data[key], id: key })
             }
             // console.log(decksArr)
             vuexCtx.commit('setDecks', decksArr)
@@ -37,17 +36,17 @@ const createStore = () => {
           })
       },
       addDeck(vuexCtx, deckData) {
-        return axios.post(process.env.baseApiUrl+'decks.json', deckData)
-          .then(res => {
-            vuexCtx.commit('addDeck', { ...deckData, id: res.data.name })
+        return this.$axios.$post(process.env.baseApiUrl+'decks.json', deckData)
+          .then(data => {
+            vuexCtx.commit('addDeck', { ...deckData, id: data.name })
           }).catch(e => {
             console.log(e)
           })
       },
       editDeck(vuexCtx, deckData) {
-        return axios.put(process.env.baseApiUrl+`decks/${deckData.id}.json`, deckData)
-          .then(res => {
-           vuexCtx.commit('editDeck',{ ...res.data, id:deckData.id })
+        return  this.$axios.$put(process.env.baseApiUrl+`decks/${deckData.id}.json`, deckData)
+          .then(data => {
+           vuexCtx.commit('editDeck',{ ...data, id:deckData.id })
           }).catch(e => {
             console.log(e)
           })

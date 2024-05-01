@@ -48,4 +48,4 @@ You should call API in action, and interact with html in page
 - Config loading
 # e37 env
 # e38 plugin basic
-
+# e39 use nuxt module

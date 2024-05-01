@@ -79,7 +79,7 @@ export default {
     },
     onSubmit(deckData) {
       // console.log(deckData)
-      axios.post(process.env.baseApiUrl+ '/decks.json', deckData)
+      this.$axios.$post(process.env.baseApiUrl+ '/decks.json', deckData)
         .then(response => {
           console.log(response)
         }).catch(e => {

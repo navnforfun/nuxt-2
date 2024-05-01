@@ -39,7 +39,7 @@ const createStore = () => {
           })
       },
       addDeck(vuexCtx, deckData) {
-        return this.$axios.$post(process.env.baseApiUrl + 'decks.json', deckData)
+        return this.$axios.$post(process.env.baseApiUrl + 'decks.json?auth=' + vuexCtx.state.token, deckData)
           .then(data => {
             vuexCtx.commit('addDeck', { ...deckData, id: data.name })
           }).catch(e => {
@@ -47,7 +47,7 @@ const createStore = () => {
           })
       },
       editDeck(vuexCtx, deckData) {
-        return this.$axios.$put(process.env.baseApiUrl + `decks/${deckData.id}.json`, deckData)
+        return this.$axios.$put(process.env.baseApiUrl + `decks/${deckData.id}.json?auth=` + vuexCtx.state.token, deckData)
           .then(data => {
             vuexCtx.commit('editDeck', { ...data, id: deckData.id })
           }).catch(e => {

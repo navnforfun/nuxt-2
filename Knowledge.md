@@ -50,3 +50,4 @@ You should call API in action, and interact with html in page
 # e38 plugin basic
 # e39 use nuxt module
 # e40 middleware
+# e41 42 login register with firebase 

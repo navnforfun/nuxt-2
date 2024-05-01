@@ -10,10 +10,13 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      {rel:'stylesheet',href:'<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">'}
+      {
+        rel: 'stylesheet',
+        href: '<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">'
+      }
     ]
   },
-  loading:'~/components/Loading/MyLoading.vue',
+  loading: '~/components/Loading/MyLoading.vue',
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
@@ -32,7 +35,7 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/tailwindcss
-    '@nuxtjs/tailwindcss',
+    '@nuxtjs/tailwindcss'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -42,13 +45,13 @@ export default {
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
     // https://go.nuxtjs.dev/content
-    '@nuxt/content',
+    '@nuxt/content'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL:process.env.BASE_API_URL || 'https://nuxt2-start-default-rtdb.asia-southeast1.firebasedatabase.app/',
+    baseURL: process.env.BASE_API_URL || 'https://nuxt2-start-default-rtdb.asia-southeast1.firebasedatabase.app/'
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
@@ -62,18 +65,18 @@ export default {
   content: {},
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-  },
-  router:{
-    middleware:'router-log'
+  build: {},
+  router: {
+    middleware: 'router-log'
   },
   server: {
     host: '0.0.0.0',
     port: '3000' // optional
   },
-  env:{
+  env: {
     baseUrl: process.env.BASE_URL || 'http://localhost:3000',
     baseApiUrl: process.env.BASE_API_URL || 'https://nuxt2-start-default-rtdb.asia-southeast1.firebasedatabase.app/',
+    fbApiKey: 'AIzaSyBBTzvmCQWqItLDCAaryrUOtnOR-zMfmZ8'
   }
 
 }

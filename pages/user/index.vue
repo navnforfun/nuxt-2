@@ -6,6 +6,7 @@ export default {
       name: ""
     }
   },
+  middleware: 'router-log',
   methods:{
     hiUser(){
       this.$router.push(`/user/${this.name}`)

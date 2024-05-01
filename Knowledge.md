@@ -49,3 +49,4 @@ You should call API in action, and interact with html in page
 # e37 env
 # e38 plugin basic
 # e39 use nuxt module
+# e40 middleware

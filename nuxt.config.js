@@ -13,6 +13,7 @@ export default {
       {rel:'stylesheet',href:'<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">'}
     ]
   },
+  loading:'~/components/Loading/MyLoading.vue',
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
@@ -65,5 +66,10 @@ export default {
   server: {
     host: '0.0.0.0',
     port: '3000' // optional
+  },
+  env:{
+    baseUrl: process.env.BASE_URL || 'http://localhost:3000',
+    baseApiUrl: process.env.BASE_API_URL || 'https://nuxt2-start-default-rtdb.asia-southeast1.firebasedatabase.app/',
   }
+
 }

@@ -23,7 +23,7 @@ const createStore = () => {
     actions: {
 
       nuxtServerInit(vuexCtx, ctx) {
-        return axios.get('https://nuxt2-start-default-rtdb.asia-southeast1.firebasedatabase.app/decks.json')
+        return axios.get(process.env.baseApiUrl+'decks.json')
           .then((response) => {
             let decksArr = []
             // console.log(response.data)
@@ -37,7 +37,7 @@ const createStore = () => {
           })
       },
       addDeck(vuexCtx, deckData) {
-        return axios.post('https://nuxt2-start-default-rtdb.asia-southeast1.firebasedatabase.app/decks.json', deckData)
+        return axios.post(process.env.baseApiUrl+'decks.json', deckData)
           .then(res => {
             vuexCtx.commit('addDeck', { ...deckData, id: res.data.name })
           }).catch(e => {
@@ -45,7 +45,7 @@ const createStore = () => {
           })
       },
       editDeck(vuexCtx, deckData) {
-        return axios.put(`https://nuxt2-start-default-rtdb.asia-southeast1.firebasedatabase.app/decks/${deckData.id}.json`, deckData)
+        return axios.put(process.env.baseApiUrl+`decks/${deckData.id}.json`, deckData)
           .then(res => {
            vuexCtx.commit('editDeck',{ ...res.data, id:deckData.id })
           }).catch(e => {

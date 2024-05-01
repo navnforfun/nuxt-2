@@ -79,7 +79,7 @@ export default {
     },
     onSubmit(deckData) {
       // console.log(deckData)
-      axios.post('https://nuxt2-start-default-rtdb.asia-southeast1.firebasedatabase.app/decks.json', deckData)
+      axios.post(process.env.baseApiUrl+ '/decks.json', deckData)
         .then(response => {
           console.log(response)
         }).catch(e => {

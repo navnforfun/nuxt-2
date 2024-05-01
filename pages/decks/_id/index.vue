@@ -85,7 +85,7 @@ export default {
   },
   asyncData(ctx) {
     return axios.get(
-      `https://nuxt2-start-default-rtdb.asia-southeast1.firebasedatabase.app/decks/${ctx.params.id}.json`
+      `${process.env.baseApiUrl}decks/${ctx.params.id}.json`
     ).then(res => {
       return {
         decks: res.data

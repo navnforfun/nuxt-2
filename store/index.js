@@ -21,6 +21,9 @@ const createStore = () => {
       },
       setToken(state, token) {
         state.token = token
+      },
+      clearToken(state) {
+        state.token = null
       }
     },
     actions: {
@@ -71,16 +74,39 @@ const createStore = () => {
           }).then(data => {
             console.log(data)
             vuexCtx.commit('setToken', data.idToken)
+            localStorage.setItem('token', data.idToken)
+            localStorage.setItem('tokenExpiration', new Date().getTime() + data.expiresIn * 1000)
+
+            vuexCtx.dispatch('setLogoutTimer', data.expiresIn * 1000)
             resolve({ success: true })
           }).catch(e => {
             reject(e.response)
           })
         })
+      },
+      setLogoutTimer(vuexCtx, duration) {
+        setTimeout(() => {
+          vuexCtx.commit('clearToken'), duration
+        })
+      },
+      initAuth(vueCtx) {
+        let token = localStorage.getItem('token')
+        let tokenExpiration = localStorage.getItem('tokenExpiration')
+        if (new Date().getTime() > tokenExpiration || !token) {
+          return false
+        }
+        vueCtx.commit('setToken', token)
+        vuexCtx.dispatch('setLogoutTimer', tokenExpiration - new Date().getTime())
+
       }
     },
+
     getters: {
       decks(state) {
         return state.decks
+      },
+      isAuthenticated(state) {
+        return state.token != null
       }
     }
   })

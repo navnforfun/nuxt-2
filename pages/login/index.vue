@@ -21,7 +21,7 @@ export default {
       }).then(data =>{
         console.log(data)
         if(data.success){
-          this.$router.push('/decks')
+          this.$router.push('/')
         }
       }).catch(e =>{
         console.log(e)

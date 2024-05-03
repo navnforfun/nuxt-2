@@ -53,3 +53,6 @@ You should call API in action, and interact with html in page
 # e41 42 login register with firebase 
 # e43 fix login to Vuex
 # e44 auth with firebase (set token to link parameter)
+# e45 middleware
+# e47 valid token by localstorage and middleware 
+- use 2 middle 1 is check auth and 1 to redirect 

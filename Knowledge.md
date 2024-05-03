@@ -56,3 +56,7 @@ You should call API in action, and interact with html in page
 # e45 middleware
 # e47 valid token by localstorage and middleware 
 - use 2 middle 1 is check auth and 1 to redirect 
+# e48 Check cookie to check login (basic)
+# e49 logout
+
+# DONE

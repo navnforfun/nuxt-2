@@ -1,6 +1,7 @@
 import Vuex from 'vuex'
 import decks from '~/pages/decks/index.vue'
 import res from 'core-js/internals/is-forced.js'
+import Cookies from 'js-cookie'
 
 const createStore = () => {
   return new Vuex.Store({
@@ -76,7 +77,8 @@ const createStore = () => {
             vuexCtx.commit('setToken', data.idToken)
             localStorage.setItem('token', data.idToken)
             localStorage.setItem('tokenExpiration', new Date().getTime() + data.expiresIn * 1000)
-
+            Cookies.set('token', data.idToken)
+            Cookies.set('tokenExpiration', new Date().getTime() + data.expiresIn * 1000)
             vuexCtx.dispatch('setLogoutTimer', data.expiresIn * 1000)
             resolve({ success: true })
           }).catch(e => {
@@ -89,15 +91,33 @@ const createStore = () => {
           vuexCtx.commit('clearToken'), duration
         })
       },
-      initAuth(vueCtx) {
-        let token = localStorage.getItem('token')
-        let tokenExpiration = localStorage.getItem('tokenExpiration')
-        if (new Date().getTime() > tokenExpiration || !token) {
-          return false
+      initAuth(vueCtx, req) {
+        let token, tokenExpiration
+        if (req) {
+          if (!req.header.cookies) return false
+          let tokenKey = req.headers.cookies.split(";").find(c => c.trim().startsWith("token="))
+          let tokenExpirationKey = req.headers.cookies.split(";").find(c => c.trim().startsWith("tokenExpiration="))
+          if(!tokenKey || !tokenExpirationKey) return false
+          token = tokenKey.split('=')[1]
+          tokenExpiration = tokenExpirationKey.split('=')[1]
+        } else {
+          token = localStorage.getItem('token')
+          tokenExpiration = localStorage.getItem('tokenExpiration')
+          if (new Date().getTime() > tokenExpiration || !token) {
+            return false
+          }
+
         }
         vueCtx.commit('setToken', token)
-        vuexCtx.dispatch('setLogoutTimer', tokenExpiration - new Date().getTime())
+        vueCtx.dispatch('setLogoutTimer', tokenExpiration - new Date().getTime())
 
+      },
+      logout(vueCtx){
+        vueCtx.commit('clearToken')
+        Cookies.remove('token')
+        Cookies.remove('tokenExpiration')
+        localStorage.removeItem('token')
+        localStorage.removeItem('tokenExpiration')
       }
     },
 

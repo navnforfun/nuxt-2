@@ -1,6 +1,13 @@
 <script>
 
-
+export default {
+  methods:{
+    logout(){
+      this.$store.dispatch('logout')
+      this.$router.push('/')
+    }
+  }
+}
 </script>
 
 <template>
@@ -20,6 +27,9 @@
       </li>
       <li>
         <nuxt-link to="login">Login</nuxt-link>
+      </li>
+      <li>
+        <p @click="logout">Logout</p>
       </li>
     </ul>
   </div>

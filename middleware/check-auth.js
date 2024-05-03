@@ -1,6 +1,3 @@
 export default function(ctx) {
-  if (process.client) {
-    ctx.store.dispatch('initAuth')
-  }
-
+    ctx.store.dispatch('initAuth',ctx.req)
 }
